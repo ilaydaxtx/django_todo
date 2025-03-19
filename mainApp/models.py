@@ -1,5 +1,6 @@
-from datetime import timezone
+from django.utils import timezone
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Task (models.Model):
@@ -13,7 +14,7 @@ class Task (models.Model):
     description = models.CharField(max_length = 200, blank=True)
     complete = models.BooleanField(editable=True, verbose_name="progress of this project", default=False)
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now
